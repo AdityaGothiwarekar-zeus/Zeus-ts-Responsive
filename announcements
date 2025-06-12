@@ -1,0 +1,207 @@
+<div className="icon-with-badge" style={{ cursor: "pointer", position: "relative" }} onClick={toggleAnnouncements}>
+  <img
+    src={isAnnouncementOpen ? "assets/icons/icons8-announcement-30.svg" : "assets/icons/announcements.svg"}
+    alt="Announcements"
+  />
+  {!isAnnouncementOpen && <span className="badge">2</span>}
+
+  {isAnnouncementOpen && (
+    <div className="announcement-dropdown">
+      <div className="announcement-scrollable">
+        {[
+          {
+            id: 1,
+            sender: "PA: Wilson Kumar",
+            title: "No classes will be held on 21st Nov",
+            desc: "2 files are attached",
+            timestamp: "15-Sep-2018 at 07:21 pm",
+            icon: "tick",
+          },
+          {
+            id: 2,
+            sender: "PA: Samson White",
+            title: "Guest lecture on Geometry on 20th September",
+            desc: "2 files are attached",
+            timestamp: "15-Sep-2018 at 07:21 pm",
+            icon: "circle",
+            highlight: true,
+          },
+          {
+            id: 3,
+            sender: "PA: Wilson Kumar",
+            title: "Additional course materials available on request",
+            desc: "Course: Mathematics 101",
+            timestamp: "15-Sep-2018 at 07:21 pm",
+            icon: "tick",
+          },
+          {
+            id: 4,
+            sender: "PA: Wilson Kumar",
+            title: "No classes will be held on 25th Dec",
+            desc: "",
+            timestamp: "15-Sep-2018 at 07:21 pm",
+            icon: "circle",
+            highlight: true,
+          },
+          {
+            id: 5,
+            sender: "PA: Wilson Kumar",
+            title: "Additional course materials available on request",
+            desc: "Course: Mathematics 101",
+            timestamp: "15-Sep-2018 at 07:21 pm",
+            icon: "circle",
+            highlight: true,
+          },
+        ].map((a) => (
+          <div
+            key={a.id}
+            className={`announcement-item ${a.highlight ? "highlight" : ""}`}
+          >
+            <div className="announcement-text">
+              <strong>{a.sender}</strong>
+              <div className="announcement-title">{a.title}</div>
+              {a.desc && (
+                <div className="announcement-meta">
+                  <span className="announcement-time">{a.timestamp}</span>
+                  <span className="attachment-info">
+                    <img src="assets/icons/paperclip.svg" className="clip-icon" alt="attachment" />
+                    {a.desc}
+                  </span>
+                </div>
+              )}
+              {!a.desc && (
+                <div className="announcement-time no-attachment">{a.timestamp}</div>
+              )}
+            </div>
+            <img
+              src={
+                a.icon === "tick"
+                  ? "/assets/images/tick.svg"
+                  : "/assets/images/untick.svg"
+              }
+              alt={a.icon}
+              className="announcement-icon"
+            />
+          </div>
+        ))}
+      </div>
+      <div className="announcement-actions">
+        <button className="show-all-btn">SHOW ALL</button>
+        <button className="create-new-btn">CREATE NEW</button>
+      </div>
+    </div>
+  )}
+</div>
+
+
+
+.announcement-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 420px;
+  max-height: 320px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 8px 0; /* dropdown padding added */
+  box-sizing: border-box;
+}
+
+.announcement-scrollable {
+  overflow-y: auto;
+  max-height: 260px;
+  padding: 0 8px;
+}
+
+.announcement-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: white;
+  min-height: 90px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.announcement-item.highlight {
+  background-color: #fff8c5;
+}
+
+.announcement-text {
+  flex-grow: 1;
+  font-size: 14px;
+  color: #333;
+}
+
+.announcement-title {
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+.announcement-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #777;
+}
+
+.announcement-meta .timestamp {
+  flex: 1;
+  text-align: left;
+  font-size: 12px;
+  color: #999;
+}
+
+.announcement-meta .attachment-info {
+  flex: 1;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #555;
+}
+
+.clip-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.announcement-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 12px;
+  margin-top: 6px;
+}
+
+.announcement-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 16px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  position: sticky;
+  bottom: 0;
+  z-index: 200;
+}
+
+.show-all-btn,
+.create-new-btn {
+  border: none;
+  background: none;
+  color: #00a77b;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
