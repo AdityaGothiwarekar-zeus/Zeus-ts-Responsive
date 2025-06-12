@@ -1,0 +1,172 @@
+const [isAlertOpen, setIsAlertOpen] = useState(false);
+const toggleAlerts = () => {
+  setIsAlertOpen(!isAlertOpen);
+  if (!isAlertOpen) {
+    setIsMenuOpen(false);
+    setOpenDropdown(null);
+    setOpenSubDropdown(null);
+  }
+};
+
+const alerts = [
+  {
+    id: 1,
+    title: "License for Introduction to Algebra has been assigned to your school",
+    timestamp: "15-Sep-2018 at 07:21 pm",
+    icon: "tick",
+  },
+  {
+    id: 2,
+    title: "Lesson 3 Practice Worksheet overdue for Amy Santiago",
+    label: "Course",
+    desc: "Advanced Mathematics",
+    timestamp: "15-Sep-2018 at 05:21 pm",
+    icon: "circle",
+  },
+  {
+    id: 3,
+    title: "23 new students created",
+    timestamp: "14-Sep-2018 at 01:21 pm",
+    icon: "circle",
+  },
+  {
+    id: 4,
+    title: "15 submissions ready for evaluation",
+    label: "Class",
+    desc: "Basics of Algebra",
+    timestamp: "13-Sep-2018 at 01:15 pm",
+    icon: "circle",
+  },
+  {
+    id: 5,
+    title: "License for Basic Concepts in Geometry has been assigned to your...",
+    timestamp: "15-Sep-2018 at 07:21 pm",
+    icon: "tick",
+  },
+  {
+    id: 6,
+    title: "Lesson 3 Practice Worksheet overdue for Sam Diego",
+    label: "Course",
+    desc: "Advanced Mathematics",
+    timestamp: "15-Sep-2018 at 07:21 pm",
+    icon: "tick",
+  },
+];
+
+
+
+
+{isAlertOpen && (
+  <div className="alert-dropdown-menu">
+    <div className="alert-scrollable">
+      {alerts.map((alert, idx) => (
+        <div
+          key={alert.id}
+          className={`alert-card ${[1, 3, 5].includes(idx) ? 'highlight' : ''}`}
+        >
+          <div className="alert-title">{alert.title}</div>
+          {alert.desc && (
+            <div className="alert-subtext">
+              {alert.label}: <span className="alert-value">{alert.desc}</span>
+            </div>
+          )}
+          <img
+            src={
+              alert.icon === "tick"
+                ? "/assets/images/tick.svg"
+                : "/assets/images/untick.svg"
+            }
+            className="alert-status"
+            alt="status"
+          />
+          <div className="alert-time">{alert.timestamp}</div>
+        </div>
+      ))}
+    </div>
+    <div className="alert-footer">
+      <button className="show-all-btn">SHOW ALL</button>
+    </div>
+  </div>
+)}
+.alert-dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 400px;
+  max-height: 330px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  overflow: hidden;
+  padding-top: 8px;
+}
+
+.alert-scrollable {
+  overflow-y: auto;
+  max-height: 280px;
+  padding: 0 10px;
+}
+
+.alert-card {
+  position: relative;
+  background-color: white;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.alert-card.highlight {
+  background-color: #fff8c5; /* yellow */
+}
+
+.alert-title {
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 4px;
+}
+
+.alert-subtext {
+  font-size: 13px;
+  color: #444;
+}
+
+.alert-value {
+  font-weight: 600;
+}
+
+.alert-status {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 18px;
+  height: 18px;
+}
+
+.alert-time {
+  font-size: 12px;
+  color: #777;
+  margin-top: 6px;
+}
+
+.alert-footer {
+  background: white;
+  border-top: 1px solid #eee;
+  padding: 12px 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 999;
+  text-align: center;
+}
+
+.show-all-btn {
+  border: none;
+  background: none;
+  color: #00a77b;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
